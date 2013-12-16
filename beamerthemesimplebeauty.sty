@@ -1,0 +1,117 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Commands
+\renewcommand\sfdefault{phv}
+\renewcommand\familydefault{\sfdefault}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Packages
+\usepackage{color}
+\usepackage{fontspec}
+\usepackage{tikz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Themes
+\usetheme{default}
+\useoutertheme{default}
+\setsansfont{Eurostile}
+\usefonttheme[onlymath]{serif}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Colour pallette
+\definecolor{bgcolor}{RGB}{36,40,43}    % background
+\definecolor{fgcolor}{RGB}{186,201,169} % structure
+\definecolor{nncolor}{RGB}{255,255,255} % normal
+\definecolor{alcolor}{RGB}{235,156,77}  % alert
+\definecolor{socolor}{RGB}{242,214,128} % soft
+\definecolor{iicolor}{RGB}{171,219,37}  % important
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Font
+\def\thisfont{\fontspec{Eurostile}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Beamer fonts
+\setbeamerfont{title}{family=\thisfont, size=\huge}
+\setbeamerfont{subtitle}{family=\thisfont, size=\Large}
+\setbeamerfont{frametitle}{family=\thisfont, size=\Large}
+\setbeamerfont{title page}{family=\thisfont}
+\setbeamerfont{structure}{family=\thisfont}
+\setbeamerfont{normal text}{family=\thisfont}
+\setbeamerfont{author in head/foot}{family=\thisfont, size=\tiny}
+\setbeamerfont{title in head/foot}{family=\thisfont, size=\small}
+\setbeamerfont{pages in head/foot}{family=\thisfont, size=\tiny}
+\setbeamerfont{institute in head/foot}{family=\thisfont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Beamer colors
+\setbeamercolor{title}{fg=iicolor}
+\setbeamercolor{subtitle}{fg=socolor}
+\setbeamercolor{author}{fg=socolor}
+\setbeamercolor{frametitle}{fg=iicolor}
+\setbeamercolor{framesubtitle}{fg=socolor}
+\setbeamercolor{structure}{fg=iicolor}
+\setbeamercolor{normal text}{bg=bgcolor, fg=nncolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Beamer templates
+\setbeamertemplate{items}[circle]
+\setbeamertemplate{navigation symbols}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cover page
+\setbeamertemplate{title page}
+{
+  \vbox{}
+  \vfill
+    \begin{beamercolorbox}[sep=8pt,left]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+    \end{beamercolorbox}%
+    \vskip1em\par
+
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+                \centering
+                \begin{tikzpicture}
+                \node[fill=gray!20,rounded corners=5pt] {
+                    \includegraphics[height=0.5\textwidth]{img/logo}
+                };
+                \end{tikzpicture}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            %%%%%
+            \begin{beamercolorbox}[sep=8pt,right]{author}
+              \usebeamerfont{author}\insertauthor
+            \end{beamercolorbox}
+            \begin{beamercolorbox}[sep=8pt,right]{institute}
+              \usebeamerfont{institute}\insertinstitute
+            \end{beamercolorbox}
+            \begin{beamercolorbox}[sep=8pt,right]{date}
+              \usebeamerfont{date}\insertdate
+            \end{beamercolorbox}\vskip0.5em
+            {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+            %%%%
+        \end{column}
+    \end{columns}
+  \vfill
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Redefining some commands
+\def\maketitle{\thispagestyle{empty}\ifbeamer@inframe\titlepage\else\frame{\titlepage}\fi\setcounter{framenumber}{0}}%
+\def\maketableofcontents{\frame{\frametitle{Table of contents}\tableofcontents}}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Footline
+\setbeamertemplate{footline}
+{%
+    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}%
+    \end{beamercolorbox}%
+
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex, leftskip=.3cm, rightskip=.3cm plus1fil]{author in head/foot}%
+        \leavevmode{%
+            \usebeamerfont{author in head/foot}\color{socolor}{\insertshortauthor}%
+            \color{nncolor}{\ |\ }%
+        }%
+        {%
+            \usebeamerfont{institute in head/foot}\color{nncolor}{\insertshortinstitute}%
+            \usebeamerfont{pages in head/foot}\hfill \insertframenumber/\inserttotalframenumber%
+        }%
+    \end{beamercolorbox}%
+
+    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}%
+    \end{beamercolorbox}%
+}%
+
